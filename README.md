@@ -67,7 +67,8 @@ Les options du menu et sous menus compris
 
 ![image](https://user-images.githubusercontent.com/58827656/132957737-5b0bc948-400f-42dc-b87d-4676df6edd7b.png)
 
-To make the .jar file work, you can use "phpmyadmin" and this MYSQL Script:
+Pour faire fonction le fichier jar, utiliser phpmyadmin, cette base de données ayant comme nom 'adherent' :  
+``` 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
@@ -78,7 +79,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de donnÃ©es :  `adherentppe1`
+-- Base de donnÃ©es :  `adherent`
 --
 
 DELIMITER $$
@@ -212,6 +213,6 @@ ALTER TABLE `adherent`
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
+```
 
 
