@@ -67,4 +67,151 @@ Les options du menu et sous menus compris
 
 ![image](https://user-images.githubusercontent.com/58827656/132957737-5b0bc948-400f-42dc-b87d-4676df6edd7b.png)
 
+To make the .jar file work, you can use "phpmyadmin" and this MYSQL Script:
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Base de donnÃ©es :  `adherentppe1`
+--
+
+DELIMITER $$
+--
+-- ProcÃ©dures
+--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ObtenirTypeAdhesion` (IN `id` INT)  READS SQL DATA
+select * from TypeAdhesion where idTypeAdhesion = id$$
+
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `adherent`
+--
+
+CREATE TABLE `adherent` (
+  `idAdherent` int(11) NOT NULL,
+  `Nom` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `Prenom` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `CodePostal` varchar(6) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `Ville` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `DateNaissance` date DEFAULT NULL,
+  `TypeAdhesion` int(11) NOT NULL,
+  `Telephone` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `Email` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `Paiement` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Contenu de la table `adherent`
+--
+
+INSERT INTO `adherent` (`idAdherent`, `Nom`, `Prenom`, `CodePostal`, `Ville`, `DateNaissance`, `TypeAdhesion`, `Telephone`, `Email`, `Paiement`) VALUES
+(28, 'Jean', 'Dupont', '98000', 'Paris', '2000-03-17', 3, '06.22.12.11.28', 'jean.dupont@gmail.com', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `administrateur`
+--
+
+CREATE TABLE `administrateur` (
+  `idAdmin` int(11) NOT NULL,
+  `login` varchar(255) NOT NULL,
+  `motdepasse` varchar(255) NOT NULL,
+  `DateDerVisite` date NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `administrateur`
+--
+
+INSERT INTO `administrateur` (`idAdmin`, `login`, `motdepasse`, `DateDerVisite`) VALUES
+(1, 'azerty123', 'azerty123', '2017-03-18');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `typeadhesion`
+--
+
+CREATE TABLE `typeadhesion` (
+  `idTypeAdhesion` int(11) NOT NULL,
+  `Libelle` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `Tarif` int(2) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Contenu de la table `typeadhesion`
+--
+
+INSERT INTO `typeadhesion` (`idTypeAdhesion`, `Libelle`, `Tarif`) VALUES
+(2, 'CompÃ©tition', 80),
+(3, 'Entrainement', 60),
+(6, 'Loisir', 50);
+
+--
+-- Index pour les tables exportÃ©es
+--
+
+--
+-- Index pour la table `adherent`
+--
+ALTER TABLE `adherent`
+  ADD PRIMARY KEY (`idAdherent`),
+  ADD KEY `fk_Adherent_TypeAdhesion_idx` (`TypeAdhesion`);
+
+--
+-- Index pour la table `administrateur`
+--
+ALTER TABLE `administrateur`
+  ADD PRIMARY KEY (`idAdmin`);
+
+--
+-- Index pour la table `typeadhesion`
+--
+ALTER TABLE `typeadhesion`
+  ADD PRIMARY KEY (`idTypeAdhesion`);
+
+--
+-- AUTO_INCREMENT pour les tables exportÃ©es
+--
+
+--
+-- AUTO_INCREMENT pour la table `adherent`
+--
+ALTER TABLE `adherent`
+  MODIFY `idAdherent` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+--
+-- AUTO_INCREMENT pour la table `administrateur`
+--
+ALTER TABLE `administrateur`
+  MODIFY `idAdmin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT pour la table `typeadhesion`
+--
+ALTER TABLE `typeadhesion`
+  MODIFY `idTypeAdhesion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- Contraintes pour les tables exportÃ©es
+--
+
+--
+-- Contraintes pour la table `adherent`
+--
+ALTER TABLE `adherent`
+  ADD CONSTRAINT `fk_Adherent_TypeAdhesion` FOREIGN KEY (`TypeAdhesion`) REFERENCES `typeadhesion` (`idTypeAdhesion`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
 
