@@ -6,13 +6,13 @@ import java.sql.SQLException;
 
 public class ConnexionDB {
 	//Variables membres
-	private static String url = "jdbc:mysql://localhost/adherentppe1?useSSL=false";
+	private static String url = "jdbc:mysql://localhost/adherent?useSSL=false";
 	private static String user = "root";
 	private static String passwd = "";
 	private static Connection connect;
 	private static ConnexionDB instance = new ConnexionDB();
 
-	//Se connect à la bdd
+	//Se connect Ã  la bdd
 	private ConnexionDB() {
 		try{
 			connect = DriverManager.getConnection(url, user, passwd);
@@ -22,7 +22,7 @@ public class ConnexionDB {
 		}
 	}
 	
-	//Crée une instance de la connection
+	//CrÃ©e une instance de la connection
 	public static Connection getInstance() throws SQLException{
 		if (connect.isClosed()) {
 			instance = new ConnexionDB();
